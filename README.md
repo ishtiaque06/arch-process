@@ -40,9 +40,28 @@ This repo describes the processes I went through to install and configure arch i
    To verify, you can run `ping google.com` to see if you get any packets in return. 
    
    ii. 
-   
-   
-   
-   
-   
-   
+5. Once you have booted, you will see a shell with the `root` user logged in. From this point on, you're ready to start following the [Arch Linux Installation Guide](https://wiki.archlinux.org/index.php/Installation_guide). Here are notes corresponding the steps that should be kept in mind:
+    1. **Connect to the Internet**: In this step, if you're connecting to a wi-fi network, you can use `wpa_supplicant` to connect to it. Here is a configuration file that I used to save a Haverford College network's details (YMMV):
+        ```
+            wpa.conf
+            --------
+            network={
+                ssid="eduroam"
+                scan_ssid=1
+                key_mgmt=WPA-EAP
+                eap=PEAP
+                phase2="auth=MSCHAPV2"
+                identity="<your eduroam username>"
+                password="<your eduroam password>"
+            }
+        ```
+        *Hint: you can use `[vim](https://vim-adventures.com/)` to edit the file, since it's available in the live media.*
+        
+        Once you've created this config file, assuming you know the name of your wireless interface (run `ip link`  to find out), run this command: `wpa_supplicant -B -i *interface* -c wpa.conf`
+        
+        If this command is successful, you will need to get an IP address: `dhcpcd *interface*`. Then you'll be connected! 
+        
+        To verify, you can run `ping google.com` to see if you get any packets in return. 
+        
+    2. Step 3.2
+    3. Step 3.3
