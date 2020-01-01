@@ -88,5 +88,17 @@ From this point on, do a couple of things:
     3. To get access to the network connection editor GUI, run `nm-applet`. This should add an icon to the i3 taskbar. Once you click on this icon, you will see a list of networks to connect to. Connect to internet from there (security reading on passwords [here](https://wiki.archlinux.org/index.php/NetworkManager#Encrypted_Wi-Fi_passwords)). 
 2. Start LightDM on boot: 
     1. Similar to NetworkManager, run `sudo systemctl enable lightdm`.
-3. Enable [tap-to-click in X11 Window Manager](https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/).
+3. Enable [tap-to-click in your X11 Window Manager](https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/).
+4. Enable brightness control:
+    1. `light`, one of the packages installed before, is a command-line utility to adjust brightness. To increase brightness by 5%, run `light -A 5`. To decrease by 5%, run `light -U 5`.
+    2. These two commands can be binded with the brightness control buttons when using i3. Open `~/.config/i3/config` in your text editor, and add the following lines there:
+        ```
+        ~/.config/i3/config
+        -------------------
+        bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+        bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+        ```
+    3. Then, add your non-root user to the `video` group to ensure you can actually adjust brightness: `sudo usermod -aG video username`.
+    4. Reboot and enjoy :)
+
 
