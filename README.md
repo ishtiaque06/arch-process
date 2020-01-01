@@ -79,4 +79,14 @@ This repo describes the processes I went through to install and configure arch i
 5. Done! Reboot.
         
 ### Post-installation
+After the reboot, you should see a login shell, which indicates a working system. To verify that the GUI works, log in as `root` and run: `systemctl start lightdm`. This should show the LightDM greeter with the non-root user selected. Login with that user. You should see anunconfigured i3 desktop. At this point, the GUI is working. 
+
+From this point on, do a couple of things:
+1. Connect to internet:
+    1. Run `sudo systemctl enable NetworkManager`. This will ensure NetworkManager starts at boot.
+    2. Run `sudo systemctl start NetworkManager` to start it. 
+    3. To get access to the network connection editor GUI, run `nm-applet`. This should add an icon to the i3 taskbar. Once you click on this icon, you will see a list of networks to connect to. Connect to internet from there (security reading on passwords [here](https://wiki.archlinux.org/index.php/NetworkManager#Encrypted_Wi-Fi_passwords)). 
+2. Start LightDM on boot: 
+    1. Similar to NetworkManager, run `sudo systemctl enable lightdm`.
+3. Enable [tap-to-click in X11 Window Manager](https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/).
 
