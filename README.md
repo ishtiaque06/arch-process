@@ -61,6 +61,22 @@ This repo describes the processes I went through to install and configure arch i
         5. Networking on the GUI:
             1. `networkmanager`
             2. `network-manager-applet`
+        6. Other:
+            1. `sudo` (permissions)
+            2. `firefox`
+            3. `light` (to control brightness)
+            4. `rxvt-unicode` (Terminal emulator)
+    3. **Add a non-root user**: By default, Arch comes with a root user with all permissions. To make the system more secure, create another user you'll regularly use following [this](https://wiki.archlinux.org/index.php/Users_and_groups#Example_adding_a_user) doc:
+        1. `useradd -m username`
+        2. `passwd username`
+        3. Add the users to `sudo-ers` (read [this](https://wiki.archlinux.org/index.php/Sudo#Configuration) first):
+            1. `EDITOR=vim visudo`
+            2. Find the line that says `root ALL=(ALL) ALL` and add `username ALL=(ALL) ALL` below that line, and save.
+    4. Add bootloader ([docs](https://wiki.archlinux.org/index.php/GRUB#UEFI_systems)):
+        1. Mount your EFI partition (let's say in /efi)
+        2. grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+        3. Write main configuration: `grub-mkconfig -o /boot/grub/grub.cfg`
+    5. Done! Reboot.
         
 ### Post-installation
 
