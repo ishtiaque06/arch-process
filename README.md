@@ -11,6 +11,8 @@ This repo describes the processes I went through to install and configure arch i
 - NVIDIA GTX 1050 Mobile
 
 ## Steps
+
+### Installation
 1. Download [Arch Linux ISO](https://www.archlinux.org/download/)
 2. Burn it into your USB drive. You can use various software for this, like [UNetBootin](https://unetbootin.github.io/). I used the following command: `sudo dd if=<iso name> of=/dev/sdx`, where `/dev/sdx` is the name of your to-be-bootable partition. 
 3. Reboot the laptop, select the USB device from the list of UEFI boot options available.
@@ -38,5 +40,23 @@ This repo describes the processes I went through to install and configure arch i
         
         To verify, you can run `ping google.com` to see if you get any packets in return. 
         
-    2. Step 3.2
-    3. Step 3.3
+    2. **Install essential packages**: the guide suggests running `pacstrap /mnt base linux linux-firmware` to get a minimal working installation. However, I've discovered that the latest linux kernel (5.4.6 on arch) doesn't work with the touchpad out of the box. So, I opted for an LTS release of the kernel, which is currently 4.19. I also added a couple other packages to get my minimum installation. These are the following:
+        1. Core:
+            1. base
+            2. linux-lts
+            3. linux-firmware
+        2. Text editor:
+            1. vim
+        3. For bootloading:
+            1. grub
+            2. efibootmgr (for UEFI)
+            3. os-prober (for multi-booting; since I have Windows on my machine)
+            4. intel-ucode (microcode for intel processor bug-fixes)
+        4. For a GUI:
+            1. xorg-server
+            2. lightdm
+            3. lightdm-gtk-greeter (login screen)
+            4. i3-gaps
+            5. nvidia
+        
+### Post-installation
