@@ -76,7 +76,7 @@ This repo describes the processes I went through to install and configure arch i
         1. Mount your EFI partition (let's say in /efi)
         2. grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
         3. Write main configuration: `grub-mkconfig -o /boot/grub/grub.cfg`
-    5. Done! Reboot.
+5. Done! Reboot.
         
 ### Post-installation
 
