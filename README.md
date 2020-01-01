@@ -1,4 +1,4 @@
-# arch-process
+# Arching Up Dell Inspiron Gaming
 This repo describes the processes I went through to install and configure arch into my laptop. This is more of a personal reference than anything else, but I'm willing to try to help out anyone who bumps into this readme and wants further guidance.
 
 **Make sure you've read through this ReadMe in its entirety before carrying out the tasks.**
