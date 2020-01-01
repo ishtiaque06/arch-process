@@ -98,7 +98,7 @@ From this point on, do a couple of things:
         bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
         bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
         ```
-    3. Then, add your non-root user to the `video` group to ensure you can actually adjust brightness: `sudo usermod -aG video username`.
+    3. Then, add your non-root user to the `video` group to ensure you can actually adjust brightness: `sudo usermod -aG video username` (see this [comment](https://github.com/haikarainen/light/issues/96#issuecomment-528328319) for reference).
     4. Reboot and enjoy :)
 
 
