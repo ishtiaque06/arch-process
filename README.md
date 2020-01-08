@@ -32,7 +32,7 @@ This repo describes the processes I went through to install and configure arch i
                 password="<your eduroam password>"
             }
         ```
-        *Hint: you can use `[vim](https://vim-adventures.com/)` to edit the file, since it's available in the live media.*
+        *Hint: you can use [`vim`](https://vim-adventures.com/) to edit the file, since it's available in the live media.*
         
         Once you've created this config file, assuming you know the name of your wireless interface (run `ip link`  to find out), run this command: `wpa_supplicant -B -i *interface* -c wpa.conf`
         
@@ -57,7 +57,7 @@ This repo describes the processes I went through to install and configure arch i
             2. `lightdm`
             3. `lightdm-gtk-greeter` (login screen)
             4. `i3-gaps`
-            5. `nvidia`
+            5. `nvidia-lts` (if you're not using `linux-lts`, then `nvidia` should work)
         5. Networking on the GUI:
             1. `networkmanager`
             2. `network-manager-applet`
@@ -65,7 +65,7 @@ This repo describes the processes I went through to install and configure arch i
             1. `sudo` (permissions)
             2. `firefox`
             3. `light` (to control brightness)
-            4. `rxvt-unicode` (Terminal emulator)
+            4. `kitty` (Terminal emulator)
     3. **Add a non-root user**: By default, Arch comes with a root user with all permissions. To make the system more secure, create another user you'll regularly use following [this](https://wiki.archlinux.org/index.php/Users_and_groups#Example_adding_a_user) doc:
         1. `useradd -m username`
         2. `passwd username`
@@ -73,15 +73,22 @@ This repo describes the processes I went through to install and configure arch i
             1. `EDITOR=vim visudo`
             2. Find the line that says `root ALL=(ALL) ALL` and add `username ALL=(ALL) ALL` below that line, and save.
     4. Add bootloader ([docs](https://wiki.archlinux.org/index.php/GRUB#UEFI_systems)):
-        1. Mount your EFI partition (let's say in /efi)
-        2. grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+        1. Mount your EFI partition (let's say in `/efi`)
+        2. `grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB`
         3. Write main configuration: `grub-mkconfig -o /boot/grub/grub.cfg`
 5. Done! Reboot.
         
 ### Post-installation
-After the reboot, you should see a login shell, which indicates a working system. To verify that the GUI works, log in as `root` and run: `systemctl start lightdm`. This should show the LightDM greeter with the non-root user selected. Login with that user. You should see anunconfigured i3 desktop. At this point, the GUI is working. 
 
-From this point on, do a couple of things:
+*NVIDIA Caricatures*
+
+Since the Dell Inspiron has an NVIDIA as well as Intel Graphics card, it generally uses the Optimus technology by default. Find out more about it [here](https://en.wikipedia.org/wiki/Nvidia_Optimus).
+
+Basically, this means the normal `nvidia` installation will not make your GUI work properly. Luckily enough, Arch has its own wiki on how to setup Optimus on your machine (link [here](https://wiki.archlinux.org/index.php/NVIDIA_Optimus)). It is worth looking through the wiki to see what you might have to do. 
+
+After you've configured Optimus, reboot and you should see a login shell, which indicates a working system. To verify that the GUI works, log in as `root` and run: `systemctl start lightdm`. This should show the LightDM greeter with the non-root user selected. Login with that user. You should see an unconfigured i3 desktop. At this point, the GUI is working. 
+
+From this point on, you can do a couple of things:
 1. Connect to internet:
     1. Run `sudo systemctl enable NetworkManager`. This will ensure NetworkManager starts at boot.
     2. Run `sudo systemctl start NetworkManager` to start it. 
